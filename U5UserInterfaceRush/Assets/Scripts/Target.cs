@@ -11,6 +11,7 @@ public class Target : MonoBehaviour
     private float xRange = 4.0f;
     private float ySpawnPos = -6.0f;
     private GameManager gameManager;
+    
 
     public int pointValue;
     public ParticleSystem explosionParticle;
@@ -50,9 +51,13 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        gameManager.UpdateScore(pointValue);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        if(gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            gameManager.UpdateScore(pointValue);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
