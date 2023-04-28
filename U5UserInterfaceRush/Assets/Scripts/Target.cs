@@ -9,7 +9,7 @@ public class Target : MonoBehaviour
     private float maxSpeed = 16.0f;
     private float maxTorque = 10.0f;
     private float xRange = 4.0f;
-    private float ySpawnPos = -6.0f;
+    private float ySpawnPos = -1.0f;
     private GameManager gameManager;
     
 
@@ -68,5 +68,15 @@ public class Target : MonoBehaviour
             gameManager.UpdateLives(-1);
         }
         
+    }
+
+    public void DestroyTarget()
+    {
+        if(gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(pointValue);
+        }
     }
 }
